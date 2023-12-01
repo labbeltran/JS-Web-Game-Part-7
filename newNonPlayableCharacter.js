@@ -23,29 +23,38 @@ function newNonPlayableCharacter(x, y) {
 
     setInterval(moveCharacter, 1)
 
-    function walkEast() {
+    async function walkEast(time) {
         direction = 'east'
         element.src = `./assets/red-character/east.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkNorth() {
+    async function walkNorth(time) {
         direction = 'north'
         element.src = `./assets/red-character/north.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkWest() {
+    async function walkWest(time) {
         direction = 'west'
         element.src = `./assets/red-character/west.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkSouth() {
+    async function walkSouth(time) {
         direction = 'south'
         element.src = `./assets/red-character/south.gif`
+        await sleep(time)
+        stop()
     }
 
     function stop() {
         direction = null
         element.src = `./assets/red-character/static.gif`
+        
     }
 
     return {
@@ -57,3 +66,61 @@ function newNonPlayableCharacter(x, y) {
         stop: stop
     }
 }
+function sleep(time){
+    return new Promise(resolve => {
+        setTimeout(resolve, time)
+    })  
+}
+
+// loop
+
+// const totalIterations = 20
+// const delayBetweenIterations = 1000
+
+// async function loopMoveNPC (){
+//     for (let i =0; i<iterations; i++){
+//         await moveNPC();
+//         await sleep(delayBetweenIterations);
+//     }
+// }
+
+// // function sleep(){
+// //     return new Promise(resolve => setTimeout(resolve, time));
+// // }
+
+// repeatMoveNPC(totalIterations, delayBetweenIterations);
+
+// loop 2
+// function* generator(i) {
+//     yield i;
+//     yield i + 10;
+//   }
+  
+//   const gen = generator(10);
+  
+//   console.log(gen.next().value);
+
+  
+//   console.log(gen.next().value);
+  
+
+  function* loopMoveNPC(){
+    let index = 0;
+    while(true){
+        yield index++;
+    }
+  }
+
+const gen = loopMoveNPC ();
+
+const iterations = 5; 
+
+for (let i = 0; i < iterations; i++) {
+    const currentIndex = gen.next().value;
+    console.log(currentIndex)
+    
+}
+
+
+
+
